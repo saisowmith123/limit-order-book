@@ -1,0 +1,5 @@
+OrderTest.CreatesValidLimitOrder 1 0.0120606
+OrderTest.SupportsPartialFill 1 0.00688846
+OrderTest.SupportsFullFill 1 0.006002
+OrderTest.RejectsZeroQuantity 1 0.00556883
+---

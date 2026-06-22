@@ -1,0 +1,5 @@
+if(EXISTS "/Users/saisowmithreddykatkuri/Desktop/Projects/limit-order-book/build/tests/order_book_tests[1]_tests.cmake")
+  include("/Users/saisowmithreddykatkuri/Desktop/Projects/limit-order-book/build/tests/order_book_tests[1]_tests.cmake")
+else()
+  add_test(order_book_tests_NOT_BUILT order_book_tests_NOT_BUILT)
+endif()
