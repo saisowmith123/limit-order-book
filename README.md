@@ -143,7 +143,3 @@ Where `P` is the number of active price levels.
 * Replay-based benchmark from generated order streams
 * Multi-threaded market data publisher
 * Lock-free queue experiments
-
-## Resume Summary
-
-Built a low-latency C++20 limit order book and matching engine supporting limit, market, cancel, and modify orders with price-time priority, partial fills, and performance benchmarks.
