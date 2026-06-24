@@ -29,7 +29,7 @@ namespace lob{
 
         [[nodiscard]] std::size_t order_count() const noexcept;
         [[nodiscard]] std::size_t price_level_count(Side side) const noexcept; // total number of price level counts(e.g 100,99,101 returns 3)
-        
+
         [[nodiscard]] bool contains_order(OrderId order_id) const;
         [[nodiscard]] Quantity quantity_at_price(Side side, Price price) const; // returns total quantity available at a specific price
 
@@ -40,10 +40,11 @@ namespace lob{
                 Quantity total_quantity;
             }; // stores all the orders which are at same price
 
+            // created when creating an order
             struct OrderLocation{
                 Side side;
                 Price price;
-                std::list<Order>::iterator order_it; // to priortize the orders by time if they are for same price
+                std::list<Order>::iterator order_it; // reference of a particular order in the list
             };
 
             using BidLevels = std::map<Price, PriceLevel, std::greater<Price>>;
@@ -51,7 +52,10 @@ namespace lob{
 
             BidLevels bids_;
             AskLevels asks_;
+            // also created when order is created
             std::unordered_map<OrderId, OrderLocation> order_index_; // maps orderid to exact location in the book
+            // map is O(1) and list we have pointer order_it so this is also O(1)
+            // using order_index we can directly go to a particular order and cancel it instead of iterating the map completly
 
             SequenceNumber next_sequence_number_ = 1;
     };
