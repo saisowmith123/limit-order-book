@@ -29,22 +29,21 @@ The engine is designed to support:
 * STL containers
 * GoogleTest
 * Linux/macOS terminal tooling
-* GDB/LLDB
 * perf for Linux profiling
 
 ## Architecture
 
 ```text
-      Incoming Limit Order
-              |
-              v
-      Matching Engine
-              |
-              v
-           Order Book
-        |              |
-      Bid Book       Ask Book
-        |              |
+Incoming Limit Order
+        |
+        v
+Matching Engine
+        |
+        v
+Order Book
+  |              |
+Bid Book       Ask Book
+  |              |
 Price Levels with FIFO order queues
 ```
 
@@ -93,6 +92,7 @@ Ask levels are sorted from lowest price to highest price, so the best ask is ava
 * [ ] Sanitizer build scripts
 * [ ] Linux perf profiling
 * [ ] Final architecture documentation
+
 
 ## Benchmarking Plan
 Planned benchmark scenarios:
