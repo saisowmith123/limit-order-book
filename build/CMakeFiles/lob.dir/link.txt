@@ -1,2 +1,0 @@
-/usr/bin/ar qc liblob.a CMakeFiles/lob.dir/src/order_book.cpp.o CMakeFiles/lob.dir/src/matching_engine.cpp.o
-/usr/bin/ranlib liblob.a
