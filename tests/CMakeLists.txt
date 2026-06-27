@@ -8,18 +8,16 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-enable_testing()
-
 add_executable(order_book_tests
     order_book_tests.cpp
 )
 
-target_include_directories(order_book_tests PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
+target_compile_features(order_book_tests PRIVATE cxx_std_20)
 
-target_link_libraries(order_book_tests PRIVATE
-    GTest::gtest_main
+target_link_libraries(order_book_tests
+    PRIVATE
+        lob
+        GTest::gtest_main
 )
 
 include(GoogleTest)

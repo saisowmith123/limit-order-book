@@ -18,7 +18,7 @@ namespace lob{
                 std::size_t order_count;
             };
         bool add_limit_order(
-            OrderId orderId,
+            OrderId order_id,
             Side side,
             Price price,
             Quantity quantity
@@ -54,8 +54,9 @@ namespace lob{
             AskLevels asks_;
             // also created when order is created
             std::unordered_map<OrderId, OrderLocation> order_index_; // maps orderid to exact location in the book
-            // map is O(1) and list we have pointer order_it so this is also O(1)
-            // using order_index we can directly go to a particular order and cancel it instead of iterating the map completly
+            // order_index_ gives average O(1) lookup by order id.                
+            // bids_/asks_ are std::map, so price-level lookup is O(log P).
+            // list erase is O(1) when we already have the iterator.
 
             SequenceNumber next_sequence_number_ = 1;
     };

@@ -49,9 +49,66 @@ namespace lob{
             return true;
         };
         if (side == Side::Buy){
-            add_to_levels(bids_);
+           return add_to_levels(bids_);
         } else{
-            add_to_levels(asks_);
+           return add_to_levels(asks_);
         }
+    }
+
+    // best bid and best ask
+    std::optional<OrderBook::LevelInfo> OrderBook::best_bid() const{
+        if(bids_.empty()){
+            return std::nullopt;
+        }
+
+        const auto& [price, level] = *bids_.begin();
+        return LevelInfo{
+            price,
+            level.total_quantity,
+            level.orders.size()
+        };
+    }
+
+    std::optional<OrderBook::LevelInfo> OrderBook::best_ask() const{
+        if(asks_.empty()){
+            return std::nullopt;
+        }
+
+        const auto& [price, level] = *asks_.begin();
+        return LevelInfo{
+            price,
+            level.total_quantity,
+            level.orders.size()
+        };
+    }
+
+    std::size_t OrderBook::order_count() const noexcept{
+        return order_index_.size();
+    }
+
+    std::size_t OrderBook::price_level_count(Side side) const noexcept{
+        if(side == Side::Buy){
+            return bids_.size();
+        }return asks_.size();
+    }
+
+    bool OrderBook::contains_order(OrderId order_id) const{
+        return order_index_.contains(order_id);
+    }
+
+    Quantity OrderBook::quantity_at_price(Side side, Price price) const{
+        if(side == Side::Buy){
+            auto it = bids_.find(price);
+            if(it == bids_.end()){
+                return 0;
+            }
+            return it->second.total_quantity;
+        }
+
+        auto it = asks_.find(price);
+        if(it == asks_.end()){
+            return 0;
+        }
+        return it->second.total_quantity;
     }
 }
